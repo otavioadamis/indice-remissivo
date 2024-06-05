@@ -27,11 +27,6 @@ public class HashGenerico<T> {
         this.vetor[chave].insere(palavra, indice); // Insere na árvore binária de busca correspondente
     }
 
-    public boolean contem(String palavra) {
-        int chave = funcaoHashDJB2(palavra.charAt(0));
-        return this.vetor[chave].busca(palavra);
-    }
-
     // Método de hash DJB2 modificado para usar apenas a primeira letra
     private int funcaoHashDJB2(char primeiraLetra) {
         return primeiraLetra % this.capacidade;

@@ -44,19 +44,30 @@ public class FileReader {
         return listaPalavras;
     }
 
-    public String[] readKeyWords(String filePath) throws IOException {
-
+    public ListaPalavras readKeyWords(String filePath) throws IOException {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
 
-        String texto = "";
-        while(scan.hasNextLine()){
-            texto = texto.concat(scan.nextLine());
+        ListaPalavras keyWordsList = new ListaPalavras();
+        StringBuilder palavraBuilder = new StringBuilder();
+
+        while (scan.hasNextLine()) {
+            String linha = scan.nextLine();
+            for (int i = 0; i < linha.length(); i++) {
+                char c = linha.charAt(i);
+                if (c != ',') {
+                    palavraBuilder.append(c);
+                } else {
+                    keyWordsList.add(palavraBuilder.toString().trim());
+                    palavraBuilder.setLength(0);
+                }
+            }
+            if (palavraBuilder.length() > 0) {
+                keyWordsList.add(palavraBuilder.toString().trim());
+                palavraBuilder.setLength(0);
+            }
         }
 
-        String[] keyWords;
-        keyWords = texto.split(", ");
-
-        return keyWords;
+        return keyWordsList;
     }
 }

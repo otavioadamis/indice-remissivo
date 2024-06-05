@@ -7,70 +7,46 @@ public class ArvoreBinariaBusca {
 
     class Nodo {
         public String palavra;
-        public List<Integer> indices;
+        public List<Integer> ocorrencias;
         public Nodo esquerdo;
         public Nodo direito;
 
-        public Nodo(String palavra, int indice) {
+        public Nodo(String palavra, int ocorrencia) {
             this.palavra = palavra;
-            this.indices = new ArrayList<>();
-            this.indices.add(indice); // Adiciona o índice inicialmente
+            this.ocorrencias = new ArrayList<>();
+            this.ocorrencias.add(ocorrencia); // Adiciona a ocorrência inicialmente
             this.esquerdo = null;
             this.direito = null;
         }
     }
 
-    public Nodo raiz;
-    public int nElementos;
+    private Nodo raiz;
 
     public ArvoreBinariaBusca() {
         this.raiz = null;
-        this.nElementos = 0;
     }
 
-    public int tamanho() {
-        return this.nElementos;
+    public void insere(String palavra, int ocorrencia) {
+        this.raiz = insereRecursivo(this.raiz, palavra, ocorrencia);
     }
 
-    public boolean estaVazia() {
-        return this.raiz == null;
-    }
-
-    public void insere(String palavra, int indice) {
-        this.raiz = insereRecursivo(this.raiz, palavra, indice);
-    }
-
-    private Nodo insereRecursivo(Nodo nodo, String palavra, int indice) {
+    private Nodo insereRecursivo(Nodo nodo, String palavra, int ocorrencia) {
         if (nodo == null) {
-            return new Nodo(palavra, indice);
+            return new Nodo(palavra, ocorrencia);
         }
 
         if (palavra.compareTo(nodo.palavra) < 0) {
-            nodo.esquerdo = insereRecursivo(nodo.esquerdo, palavra, indice);
+            nodo.esquerdo = insereRecursivo(nodo.esquerdo, palavra, ocorrencia);
         } else if (palavra.compareTo(nodo.palavra) > 0) {
-            nodo.direito = insereRecursivo(nodo.direito, palavra, indice);
+            nodo.direito = insereRecursivo(nodo.direito, palavra, ocorrencia);
         } else {
-            nodo.indices.add(indice);
+            nodo.ocorrencias.add(ocorrencia);
         }
         return nodo;
     }
 
-    private Nodo maiorElemento(Nodo nodo) {
-        while (nodo.direito != null) {
-            nodo = nodo.direito;
-        }
-        return nodo;
-    }
-
-    private Nodo menorElemento(Nodo nodo) {
-        while (nodo.esquerdo != null) {
-            nodo = nodo.esquerdo;
-        }
-        return nodo;
-    }
-
-    public boolean busca(String palavra) {
-        return !buscaRecursiva(this.raiz, palavra).isEmpty();
+    public List<Integer> busca(String palavra) {
+        return buscaRecursiva(this.raiz, palavra);
     }
 
     private List<Integer> buscaRecursiva(Nodo nodo, String palavra) {
@@ -83,26 +59,7 @@ public class ArvoreBinariaBusca {
         } else if (palavra.compareTo(nodo.palavra) > 0) {
             return buscaRecursiva(nodo.direito, palavra);
         } else {
-            return nodo.indices;
+            return nodo.ocorrencias;
         }
-    }
-
-    private int altura(Nodo nodo) {
-
-        if (nodo == null) {
-            return -1;
-        }
-
-        int alturaEsquerda = this.altura(nodo.esquerdo) + 1;
-        int alturaDireita = this.altura(nodo.direito) + 1;
-
-        int altura = alturaEsquerda > alturaDireita ? alturaEsquerda : alturaDireita;
-
-        return altura;
-
-    }
-
-    public int altura() {
-        return this.altura(this.raiz);
     }
 }
