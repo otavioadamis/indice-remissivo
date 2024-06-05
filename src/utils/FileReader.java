@@ -1,9 +1,11 @@
 package utils;
+import estruturas.ListaPalavras;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 public class FileReader {
-    public String[] readLines(String filePath) throws IOException {
+    public ListaPalavras readLines(String filePath) throws IOException {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
 
@@ -15,14 +17,31 @@ public class FileReader {
 
         String texto = textoBuilder.toString();
 
-        // Dividir o texto em palavras mantendo as quebras de linha e caracteres especiais
-        String[] palavras = texto.split("(?<=\\b\\s|\\p{Punct})|(?=\\b\\s|\\p{Punct})");
+        ListaPalavras listaPalavras = new ListaPalavras();
+        StringBuilder palavraBuilder = new StringBuilder();
 
-        // Process each word
-        for (int i = 0; i < palavras.length; i++) {
-            palavras[i] = palavras[i].toLowerCase(); // Convert to lowercase
+        for (int i = 0; i < texto.length(); i++) {
+            char c = texto.charAt(i);
+            if (Character.isLetterOrDigit(c)) {
+                palavraBuilder.append(c);
+            } else if (c == '\n') { // Se encontrar uma quebra de linha
+                if (!palavraBuilder.isEmpty()) {
+                    listaPalavras.add(palavraBuilder.toString());
+                    palavraBuilder.setLength(0);
+                }
+                listaPalavras.add("\n"); // Adiciona a quebra de linha à lista
+            } else if (!palavraBuilder.isEmpty()) {
+                listaPalavras.add(palavraBuilder.toString());
+                palavraBuilder.setLength(0);
+            }
         }
-        return palavras;
+
+// Se houver uma palavra pendente no final do texto
+        if (!palavraBuilder.isEmpty()) {
+            listaPalavras.add(palavraBuilder.toString());
+        }
+
+        return listaPalavras;
     }
 
     public String[] readKeyWords(String filePath) throws IOException {
