@@ -22,7 +22,7 @@ public class Main {
 
 
     public static String generateIndex(ListaPalavras texto, ListaPalavras palavrasChave) {
-        StringBuilder indiceRemissivo = new StringBuilder();
+        String indiceRemissivo = "";
         ArvoreBinariaBusca arvore = new ArvoreBinariaBusca();
 
         // Inserir palavras do texto na árvore com seus índices de linha
@@ -40,17 +40,17 @@ public class Main {
             ListaOcorrencias ocorrencias = arvore.busca(keyWord);
 
             if (!ocorrencias.isEmpty()) {
-                indiceRemissivo.append(keyWord).append(": ");
+                indiceRemissivo += (keyWord) + (": ");
                 for (int j = 0; j < ocorrencias.size(); j++) {
-                    indiceRemissivo.append(ocorrencias.get(j));
+                    indiceRemissivo += (ocorrencias.get(j));
                     if (j < ocorrencias.size() - 1) {
-                        indiceRemissivo.append(", ");
+                        indiceRemissivo += (", ");
                     }
                 }
-                indiceRemissivo.append("\n");
+                indiceRemissivo += ("\n");
             }
         }
-        return indiceRemissivo.toString();
+        return indiceRemissivo;
     }
 
     private static int obterNumeroLinha(ListaPalavras texto, int indicePalavra) {

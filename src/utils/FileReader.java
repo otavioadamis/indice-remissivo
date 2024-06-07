@@ -9,39 +9,36 @@ public class FileReader {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
 
-        StringBuilder textoBuilder = new StringBuilder();
+        String texto = "";
 
         while (scan.hasNextLine()) {
-            textoBuilder.append(scan.nextLine());
-            textoBuilder.append("\n"); //Adicionando quebra de linha para verificar mais tarde em outras funcoes
+            texto += (scan.nextLine());
+            texto += "\n"; //Adicionando quebra de linha para verificar mais tarde em outras funcoes
         }
 
-        String texto = textoBuilder.toString();
-
         ListaPalavras listaPalavras = new ListaPalavras();
-        StringBuilder palavraBuilder = new StringBuilder();
+        String palavra = "";
 
         for (int i = 0; i < texto.length(); i++) {
             char c = texto.charAt(i);
             if (Character.isLetterOrDigit(c)) {
-                palavraBuilder.append(c);
+                palavra += (c);
             } else if (c == '\n') { // Se encontrar uma quebra de linha
-                if (!palavraBuilder.isEmpty()) {
-                    listaPalavras.add(palavraBuilder.toString());
-                    palavraBuilder.setLength(0);
+                if (!palavra.isEmpty()) {
+                    listaPalavras.add(palavra);
+                    palavra = "";
                 }
                 listaPalavras.add("\n"); // Adiciona a quebra de linha à lista
-            } else if (!palavraBuilder.isEmpty()) {
-                listaPalavras.add(palavraBuilder.toString());
-                palavraBuilder.setLength(0);
+            } else if (!palavra.isEmpty()) {
+                listaPalavras.add(palavra);
+                palavra = "";
             }
         }
 
         // Se houver uma palavra pendente no final do texto
-        if (!palavraBuilder.isEmpty()) {
-            listaPalavras.add(palavraBuilder.toString());
+        if (!palavra.isEmpty()) {
+            listaPalavras.add(palavra);
         }
-
         return listaPalavras;
     }
 
@@ -50,25 +47,24 @@ public class FileReader {
         Scanner scan = new Scanner(file);
 
         ListaPalavras keyWordsList = new ListaPalavras();
-        StringBuilder palavraBuilder = new StringBuilder();
+        String palavra = "";
 
         while (scan.hasNextLine()) {
             String linha = scan.nextLine();
             for (int i = 0; i < linha.length(); i++) {
                 char c = linha.charAt(i);
                 if (c != ',') {
-                    palavraBuilder.append(c);
+                    palavra += (c);
                 } else {
-                    keyWordsList.add(palavraBuilder.toString().trim());
-                    palavraBuilder.setLength(0);
+                    keyWordsList.add(palavra.trim());
+                    palavra = "";
                 }
             }
-            if (palavraBuilder.length() > 0) {
-                keyWordsList.add(palavraBuilder.toString().trim());
-                palavraBuilder.setLength(0);
+            if (palavra.length() > 0) {
+                keyWordsList.add(palavra.trim());
+                palavra = "";
             }
         }
-
         return keyWordsList;
     }
 }
