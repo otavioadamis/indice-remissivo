@@ -8,7 +8,6 @@ public class ListaOcorrencias {
             this.proximo = null;
         }
     }
-
     private Nodo primeiro;
     private Nodo ultimo;
     private int tamanho;

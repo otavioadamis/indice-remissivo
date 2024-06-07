@@ -4,20 +4,18 @@ import estruturas.ListaPalavras;
 import utils.FileReader;
 import utils.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         FileReader fileReader = new FileReader();
 
-        ListaPalavras palavrasTexto  = fileReader.readLines("C:\\Users\\otavi\\Desktop\\Texto.txt");
-        ListaPalavras keyWords = fileReader.readKeyWords("C:\\Users\\otavi\\Desktop\\KeyWords.txt");
+        ListaPalavras palavrasTexto  = fileReader.readLines(System.getProperty("user.home") + "\\Desktop\\Texto.txt");
+        ListaPalavras keyWords = fileReader.readKeyWords(System.getProperty("user.home") + "\\Desktop\\KeyWords.txt");
 
         String indiceRemissivo = generateIndex(palavrasTexto, keyWords);
 
         FileWriter writer = new FileWriter();
-        writer.writeLines("C:\\Users\\otavi\\Desktop\\IndiceRemissivo.txt", indiceRemissivo);
+        writer.writeLines(System.getProperty("user.home") + "\\Desktop\\IndiceRemissivo.txt", indiceRemissivo);
     }
 
 
