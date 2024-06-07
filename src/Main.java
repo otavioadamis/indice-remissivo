@@ -23,7 +23,6 @@ public class Main {
 
     public static String generateIndex(ListaPalavras texto, ListaPalavras palavrasChave) {
         StringBuilder indiceRemissivo = new StringBuilder();
-
         ArvoreBinariaBusca arvore = new ArvoreBinariaBusca();
 
         // Inserir palavras do texto na árvore com seus índices de linha
@@ -38,7 +37,7 @@ public class Main {
         // Gerar índice remissivo para cada palavra-chave
         for (int k = 0; k < palavrasChave.size(); k++) {
             String keyWord = palavrasChave.get(k);
-            List<Integer> ocorrencias = arvore.busca(keyWord);
+            ListaOcorrencias ocorrencias = arvore.busca(keyWord);
 
             if (!ocorrencias.isEmpty()) {
                 indiceRemissivo.append(keyWord).append(": ");

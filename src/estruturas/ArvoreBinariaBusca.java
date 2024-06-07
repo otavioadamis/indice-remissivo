@@ -7,13 +7,13 @@ public class ArvoreBinariaBusca {
 
     class Nodo {
         public String palavra;
-        public List<Integer> ocorrencias;
+        public ListaOcorrencias ocorrencias;
         public Nodo esquerdo;
         public Nodo direito;
 
         public Nodo(String palavra, int ocorrencia) {
             this.palavra = palavra;
-            this.ocorrencias = new ArrayList<>();
+            this.ocorrencias = new ListaOcorrencias();
             this.ocorrencias.add(ocorrencia); // Adiciona a ocorrência inicialmente
             this.esquerdo = null;
             this.direito = null;
@@ -45,13 +45,13 @@ public class ArvoreBinariaBusca {
         return nodo;
     }
 
-    public List<Integer> busca(String palavra) {
+    public ListaOcorrencias busca(String palavra) {
         return buscaRecursiva(this.raiz, palavra);
     }
 
-    private List<Integer> buscaRecursiva(Nodo nodo, String palavra) {
+    private ListaOcorrencias buscaRecursiva(Nodo nodo, String palavra) {
         if (nodo == null) {
-            return new ArrayList<>(); // Palavra não encontrada, retorna uma lista vazia
+            return new ListaOcorrencias(); // Palavra não encontrada, retorna uma lista vazia
         }
 
         if (palavra.compareTo(nodo.palavra) < 0) {

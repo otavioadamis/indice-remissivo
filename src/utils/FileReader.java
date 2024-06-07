@@ -10,9 +10,10 @@ public class FileReader {
         Scanner scan = new Scanner(file);
 
         StringBuilder textoBuilder = new StringBuilder();
+
         while (scan.hasNextLine()) {
             textoBuilder.append(scan.nextLine());
-            textoBuilder.append("\n"); // Adiciona explicitamente a quebra de linha
+            textoBuilder.append("\n"); //Adicionando quebra de linha para verificar mais tarde em outras funcoes
         }
 
         String texto = textoBuilder.toString();
@@ -36,7 +37,7 @@ public class FileReader {
             }
         }
 
-// Se houver uma palavra pendente no final do texto
+        // Se houver uma palavra pendente no final do texto
         if (!palavraBuilder.isEmpty()) {
             listaPalavras.add(palavraBuilder.toString());
         }
