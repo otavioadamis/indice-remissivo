@@ -18,6 +18,7 @@ public class Main {
         writer.writeLines(System.getProperty("user.home") + "\\Desktop\\IndiceRemissivo.txt", indiceRemissivo);
     }
 
+    //FCIROAIFOAI 0OIFUJAOIGJA OIGJAOI GJAOGJAOJGAO JGOIAJGOI AJOGIAJOGJ AIOGJAOI JGOIAJGOIA JIGOJAIOGJAOIGA
 
     public static String generateIndex(ListaPalavras texto, ListaPalavras palavrasChave) {
         String indiceRemissivo = "";
