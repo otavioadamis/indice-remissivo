@@ -51,7 +51,7 @@ public class ArvoreBinariaBusca {
 
     private ListaOcorrencias buscaRecursiva(Nodo nodo, String palavra) {
         if (nodo == null) {
-            return new ListaOcorrencias(); // Palavra não encontrada, retorna uma lista vazia
+            return new ListaOcorrencias();
         }
 
         if (palavra.compareTo(nodo.palavra) < 0) {

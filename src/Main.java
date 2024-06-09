@@ -22,14 +22,14 @@ public class Main {
         String indiceRemissivo = "";
         ArvoreBinariaBusca arvore = new ArvoreBinariaBusca();
 
-        // percorre o texto, insere palavras junto com os indices na arvore binaria.
+        int numLinhaAtual = 1;
         for (int i = 0; i < texto.size(); i++) {
-            String palavra = texto.get(i).replaceAll("\\s", ""); // Remover espaços
+            String palavra = texto.get(i);
 
-            if (!palavra.isEmpty() && !palavra.equals("\n")) {
-                int numeroLinha = obterNumeroLinha(texto, i);
-                arvore.insere(palavra, numeroLinha);
+            if (!palavra.equals("\n")) {
+                arvore.insere(palavra, numLinhaAtual);
             }
+            else{numLinhaAtual++;}
         }
 
         // Gerar índice remissivo para cada palavra-chave
@@ -51,18 +51,5 @@ public class Main {
             }
         }
         return indiceRemissivo;
-    }
-
-    private static int obterNumeroLinha(ListaPalavras texto, int indicePalavra) {
-        int numeroLinha = 1; // Começa da linha 1
-
-        // Conta as quebras de linha antes do índice da palavra
-        for (int i = 0; i < indicePalavra; i++) {
-            if (texto.get(i).contains("\n")) {
-                numeroLinha++;
-            }
-        }
-
-        return numeroLinha;
     }
 }
