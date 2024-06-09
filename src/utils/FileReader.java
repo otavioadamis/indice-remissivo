@@ -13,7 +13,7 @@ public class FileReader {
 
         while (scan.hasNextLine()) {
             texto += (scan.nextLine());
-            texto += "\n"; //Adicionando quebra de linha para verificar mais tarde em outras funcoes
+            texto += "\n";
         }
 
         ListaPalavras listaPalavras = new ListaPalavras();
@@ -21,21 +21,23 @@ public class FileReader {
 
         for (int i = 0; i < texto.length(); i++) {
             char c = texto.charAt(i);
+
             if (Character.isLetterOrDigit(c)) {
                 palavra += (c);
-            } else if (c == '\n') { // Se encontrar uma quebra de linha
+            }
+            else if (c == '\n') {
                 if (!palavra.isEmpty()) {
                     listaPalavras.add(palavra);
                     palavra = "";
                 }
-                listaPalavras.add("\n"); // Adiciona a quebra de linha à lista
-            } else if (!palavra.isEmpty()) {
+                listaPalavras.add("\n");
+            }
+            else if (!palavra.isEmpty()) {
                 listaPalavras.add(palavra);
                 palavra = "";
             }
         }
 
-        // Se houver uma palavra pendente no final do texto
         if (!palavra.isEmpty()) {
             listaPalavras.add(palavra);
         }
