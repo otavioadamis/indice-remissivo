@@ -34,10 +34,6 @@ public class ListaPalavras {
         tamanho++;
     }
 
-    public boolean isEmpty(){
-        return tamanho == 0;
-    }
-
     public int size(){
         return this.tamanho;
     }

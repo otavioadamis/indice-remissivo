@@ -12,13 +12,13 @@ public class Main {
         ListaPalavras palavrasTexto  = fileReader.readLines(System.getProperty("user.home") + "\\Desktop\\Texto.txt");
         ListaPalavras keyWords = fileReader.readKeyWords(System.getProperty("user.home") + "\\Desktop\\KeyWords.txt");
 
-        String indiceRemissivo = generateIndex(palavrasTexto, keyWords);
+        String indiceRemissivo = gerarIndice(palavrasTexto, keyWords);
 
         FileWriter writer = new FileWriter();
         writer.writeLines(System.getProperty("user.home") + "\\Desktop\\IndiceRemissivo.txt", indiceRemissivo);
     }
 
-    public static String generateIndex(ListaPalavras texto, ListaPalavras palavrasChave) {
+    public static String gerarIndice(ListaPalavras texto, ListaPalavras palavrasChave) {
         String indiceRemissivo = "";
         ArvoreBinariaBusca arvore = new ArvoreBinariaBusca();
 
@@ -32,7 +32,6 @@ public class Main {
             else{numLinhaAtual++;}
         }
 
-        // Gerar índice remissivo para cada palavra-chave
         for (int k = 0; k < palavrasChave.size(); k++) {
             String keyWord = palavrasChave.get(k);
             ListaOcorrencias ocorrencias = arvore.busca(keyWord);

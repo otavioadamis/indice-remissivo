@@ -14,7 +14,7 @@ public class ArvoreBinariaBusca {
         public Nodo(String palavra, int ocorrencia) {
             this.palavra = palavra;
             this.ocorrencias = new ListaOcorrencias();
-            this.ocorrencias.add(ocorrencia); // Adiciona a ocorrência inicialmente
+            this.ocorrencias.add(ocorrencia);
             this.esquerdo = null;
             this.direito = null;
         }
