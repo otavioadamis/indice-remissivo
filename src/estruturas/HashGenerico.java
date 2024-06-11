@@ -21,13 +21,11 @@ public class HashGenerico<T> {
     }
 
     public void insere(String palavra, int indice) {
-        char primeiraLetra = palavra.charAt(0); // Obtém a primeira letra da palavra
-        int chave = funcaoHashDJB2(primeiraLetra); // Calcula a posição na tabela hash
-
-        this.vetor[chave].insere(palavra, indice); // Insere na árvore binária de busca correspondente
+        char primeiraLetra = palavra.charAt(0);
+        int chave = funcaoHashDJB2(primeiraLetra);
+        this.vetor[chave].insere(palavra, indice);
     }
 
-    // Método de hash DJB2 modificado para usar apenas a primeira letra
     private int funcaoHashDJB2(char primeiraLetra) {
         return primeiraLetra % this.capacidade;
     }
